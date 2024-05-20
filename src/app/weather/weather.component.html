@@ -1,0 +1,18 @@
+<div class="weather-app-container">
+    <h1 class="weather-head">Check your weather</h1>
+    <input type="text" [(ngModel)]="city" placeholder="Enter city name" (ngModelChange)="onCityChange($event)" />
+    <button (click)="getWeather()" [disabled]="!city">Get Weather</button>
+    <div *ngIf="!city">
+        <p>Please type a city name.</p>
+    </div>
+    <div *ngIf="loading">
+        <mat-spinner></mat-spinner> 
+    </div>
+    <div *ngIf="weatherData && !loading">
+        <h2>Weather in {{ weatherData.name }}</h2>
+        <p>Temperature: {{ weatherData.main.temp }} °C</p>
+        <p>Weather: {{ weatherData.weather[0].description }}</p>
+        <p>Humidity: {{ weatherData.main.humidity }}%</p>
+        <p [ngClass]="messageClass">{{ temperatureMessage }}</p>
+    </div>
+</div>
